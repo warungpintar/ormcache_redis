@@ -8,7 +8,7 @@
 This module is compatible with **Odoo 11** and **Python 3**. For older versions, you can refer to the original source code (see credits below).
 
 ## Configuration
-In order to use `odoo-orm-cahe` you will need to switch to "Developer mode" and define a new system parameter as follows:
+In order to use `odoo-orm-cahe` you will need to edit odoo.conf file located in /etc/odoo/odoo.conf:
 * modify the master odoo.conf file:
 ```
     ormcache_redis_url=redis://@redis-ip:6379/0 
