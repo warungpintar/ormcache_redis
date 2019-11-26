@@ -16,5 +16,5 @@ In order to use `odoo-orm-cahe` you will need to switch to "Developer mode" and 
 ```
 
 ## Additional Information and Credits
-This code is [custom from this repo](https://github.com/openliu/Odoo-Cluster) who ported the [original code from tvanesse](https://github.com/tvanesse/odoo-s3) to Odoo v11.0 and using it as modular.
+This code is [custom from this repo](https://github.com/openliu/Odoo-Cluster) who ported to Odoo v11.0 and using it as modular.
 
