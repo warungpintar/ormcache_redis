@@ -20,4 +20,5 @@ def cache(self):
     db_name = self.db_name
     return RedisLRU(r,db_name)
 
-Registry.cache = cache
+if odoo.tools.config.get('ormcache_redis_url'):
+    Registry.cache = cache
