@@ -16,9 +16,8 @@ _logger = logging.getLogger(__name__)
 #
 @lazy_property
 def cache(self):
-    r=redis.StrictRedis.from_url(odoo.tools.config['ormcache_redis_url'])
-    db_name = self.db_name
-    return RedisLRU(r,db_name)
+    r = redis.StrictRedis.from_url(odoo.tools.config['ormcache_redis_url'])
+    return RedisLRU(r, self.db_name, odoo.tools.config.get('ormcache_redis_expire'))
 
 if odoo.tools.config.get('ormcache_redis_url'):
     Registry.cache = cache

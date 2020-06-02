@@ -24,10 +24,11 @@ def to_str(obj):
 
 class RedisLRU(object):
 
-    def __init__(self, redis, namespace):
+    def __init__(self, redis, namespace, expire):
         self.redis = redis
         self.namespace = namespace
         self.namespace_generation = 0
+        self.expire = expire or 604800 #default 7 days in second
         version = self.redis.execute_command("eval ", "return redis.call('get','" + self.namespace + "_generation')", 0)
         if not version:
             self.redis.execute_command("eval ", "return redis.call('incr','" + self.namespace + "_generation')", 0)
@@ -57,8 +58,8 @@ class RedisLRU(object):
         key = to_str(obj)
         jsonval=pickle.dumps(val)
         self.redis.execute_command("eval ",
-                                    "return redis.call('set','" + self.namespace + "_'..redis.call('get','" + self.namespace + "_generation')..'" + key + "',KEYS[1])",
-                                    1, jsonval)
+                                    "return redis.call('setex','" + self.namespace + "_'..redis.call('get','" + self.namespace + "_generation')..'" + 
+                                    key + "'," + str(self.expire) + ",KEYS[1])", 1, jsonval)
 
     def __delitem__(self, obj):
         key = to_str(obj)
